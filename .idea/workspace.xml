@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9a4d390e-17a1-445a-b100-0d6172c661e0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/models/attendance_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/models/attendance_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/models/class_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/models/class_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/models/user_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/models/user_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/providers/auth_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/providers/auth_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/providers/staff_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/providers/staff_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/providers/student_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/providers/student_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/auth/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/auth/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/attendance_reports.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/attendance_reports.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/class_location_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/class_location_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/modify_attendance_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/modify_attendance_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/staff_dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/staff_dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/view_attendance_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/staff/view_attendance_staff.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/attendance_history_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/attendance_history_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/mark_attendance_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/mark_attendance_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/student_dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/student_dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/view_attendance_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/screens/student/view_attendance_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/services/api_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/services/api_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/services/auth_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/services/auth_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/services/biometric_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/services/biometric_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/services/camera_Service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/services/camera_Service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/lib/services/wifi_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/lib/services/wifi_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attendance_app_frontend/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_app_frontend/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/attendance_app_frontend" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="39hYxJgSAUHWRftvmdN0A97l5vA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a4d390e-17a1-445a-b100-0d6172c661e0" name="Changes" comment="" />
+      <created>1771150017000</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771150017000</updated>
+    </task>
+    <servers />
+  </component>
+</project>
