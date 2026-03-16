@@ -51,6 +51,7 @@ class ApiService {
     String url, { // 🔹 url is required
     File? file,
     String? token,
+    String? fieldName, // Defaults to "auditSelfie" for Triple-Lock, "file" for legacy
     Map<String, String>? fields,
   }) async {
     if (url.isEmpty) {
@@ -60,10 +61,14 @@ class ApiService {
     var request =
         http.MultipartRequest("POST", Uri.parse("${ApiConfig.baseUrl}$url"));
 
+    // Determine the field name based on the URL pattern
+    final String resolvedFieldName = fieldName ??
+        (url.contains('verify-attendance') ? 'auditSelfie' : 'file');
+
     // Add file if provided
     if (file != null) {
       request.files.add(
-        await http.MultipartFile.fromPath("file", file.path),
+        await http.MultipartFile.fromPath(resolvedFieldName, file.path),
       );
     }
 

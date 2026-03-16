@@ -1,10 +1,14 @@
 const Class = require("../models/Class");
 const Attendance = require("../models/Attendance");
+const User = require("../models/User");
 
 // @desc    Get student dashboard data
 exports.getDashboard = async (req, res) => {
   try {
     const studentId = req.user.studentId || req.user.id;
+    
+    // Fetch user for name
+    const user = await User.findById(req.user.id).select('name');
     
     // Get today's date
     const today = new Date().toISOString().split('T')[0];
@@ -24,6 +28,9 @@ exports.getDashboard = async (req, res) => {
     res.json({
       success: true,
       data: {
+        user: {
+          name: user?.name || "Student"
+        },
         today: {
           marked: !!todayAttendance,
           status: todayAttendance?.status || "NOT_MARKED"

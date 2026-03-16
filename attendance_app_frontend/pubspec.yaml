@@ -55,6 +55,9 @@ dependencies:
   # Check WiFi/router connection
   connectivity_plus: ^5.0.2
 
+  # Runtime permission management (required for BSSID/Fine Location on Android)
+  permission_handler: ^11.3.1
+
   # For environment variables (.env file)
   flutter_dotenv: ^5.1.0
 
@@ -64,6 +67,21 @@ dependencies:
   network_info_plus: ^5.0.3
   wifi_iot: ^0.3.19
   dart_ping: ^7.0.0
+
+  # SHA-256 hashing for biometric domain state signatures (Triple-Lock)
+  crypto: ^3.0.3
+  table_calendar: ^3.2.0
+  intl: ^0.20.2
+
+  # New Multi-Factor dependencies
+  geolocator: ^13.0.1
+  google_mlkit_face_detection: ^0.13.0
+  mobile_scanner: ^6.0.4
+  wifi_scan: ^0.4.1+2
+  qr_flutter: ^4.1.0
+  google_fonts: ^6.2.1
+  flutter_animate: ^4.5.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

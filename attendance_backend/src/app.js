@@ -28,7 +28,7 @@ if (!fs.existsSync(uploadsDir)) {
 // Middleware
 app.use(cors({
   //origin: ["http://localhost:3000", "http://localhost:5000", "http://localhost:8081"],
-  origin: ["http://10.0.2.2:5000","https://192.168.2.63:5000"],
+  origin: ["http://10.0.2.2:5000","https://192.168.2.63:5000","https://10.88.212.156:5000"],
   credentials: true
 }));
 app.use(express.json());
@@ -56,6 +56,8 @@ app.use("/api/attendance", attendanceRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/staff", staffRoutes);
 app.use("/api/student", studentRoutes);
+app.use("/api/class", staffRoutes); // Allow access to class resources via staff controller logic
+
 
 console.log("Registered route mounts:");
 app._router.stack.forEach(middleware => {

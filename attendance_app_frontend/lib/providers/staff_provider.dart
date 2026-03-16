@@ -110,4 +110,25 @@ class StaffProvider extends ChangeNotifier {
     loading = false;
     notifyListeners();
   }
+
+  /// ================================
+  /// UPDATE STUDENT STATUS (NEW)
+  /// ================================
+  Future<bool> updateStudentStatus(String studentId, String status) async {
+    try {
+      final res = await ApiService.post("/attendance/update-status", body: {
+        "studentId": studentId,
+        "status": status,
+      });
+
+      if (res["success"]) {
+        // Refresh local list
+        await loadTodayClassAttendance();
+        return true;
+      }
+    } catch (e) {
+      print("Update status error: $e");
+    }
+    return false;
+  }
 }

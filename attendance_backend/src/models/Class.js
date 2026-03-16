@@ -43,6 +43,15 @@ const classSchema = new mongoose.Schema({
     longitude: Number,
     wifiRouter: String
   },
+  // ─── NEW: The hardware BSSID (MAC address) of the classroom router ───────
+  // Set this to the actual MAC of your classroom's Wi-Fi AP,
+  // e.g. "00:0a:95:9d:68:16". Only devices physically in range of this
+  // specific access point will pass the network check.
+  authorizedBssid: {
+    type: String,
+    default: null
+  },
+  // ─────────────────────────────────────────────────────────────────────────
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"

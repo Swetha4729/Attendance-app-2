@@ -8,8 +8,12 @@ const roleMiddleware = require("../middleware/roleMiddleware");
 router.use(authMiddleware);
 router.use(roleMiddleware.isStaffOrAdmin);
 
+// Dashboard
+router.get("/dashboard", staffController.getDashboard);
+
 // Class management
 router.get("/classes", staffController.getStaffClasses);
+router.get("/class/:classId/students", staffController.getClassStudents);
 router.get("/class/:classId/attendance", staffController.getClassAttendance);
 router.post("/class/:classId/attendance", staffController.markClassAttendance);
 

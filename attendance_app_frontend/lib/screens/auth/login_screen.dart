@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'dart:ui';
 import '../../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,447 +12,293 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin {
+class _LoginScreenState extends State<LoginScreen> {
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
   String role = 'STUDENT';
-  
-  late final AnimationController _animationController;
-  late final Animation<double> _fadeAnimation;
-  late final Animation<double> _slideAnimation;
-  late final Animation<double> _scaleAnimation;
-  
-  bool _isAnimationInitialized = false;
-
-  @override
-  void initState() {
-    super.initState();
-    
-    // Initialize animation controller immediately
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    );
-    
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
-      ),
-    );
-    
-    _slideAnimation = Tween<double>(begin: 50.0, end: 0.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
-      ),
-    );
-    
-    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.4, 1.0, curve: Curves.elasticOut),
-      ),
-    );
-    
-    // Mark animation as initialized
-    _isAnimationInitialized = true;
-    
-    // Start animation after build
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_animationController.isDismissed) {
-        _animationController.forward();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F2FA),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: _isAnimationInitialized
-              ? AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform.translate(
-                      offset: Offset(0, _slideAnimation.value),
-                      child: Opacity(
-                        opacity: _fadeAnimation.value,
-                        child: Transform.scale(
-                          scale: _scaleAnimation.value,
-                          child: child,
-                        ),
-                      ),
-                    );
-                  },
-                  child: _buildLoginForm(context, auth),
-                )
-              : _buildLoginForm(context, auth), // Show static form while animating
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoginForm(BuildContext context, AuthProvider auth) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          )
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      backgroundColor: const Color(0xFFF8FAFC),
+      body: Stack(
         children: [
-          // Animated Welcome Text
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: Text(
-              'Welcome Back',
-              key: const ValueKey('welcome'),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple.shade800,
+          // ── Decorative Top Background ────────────────────────────────────
+          Positioned(
+            top: -50,
+            left: -50,
+            child: _buildCircle(250, const Color(0xFF4F46E5).withOpacity(0.05)),
+          ).animate().fadeIn(duration: 1.seconds).scale(),
+
+          Positioned(
+            top: 100,
+            right: -80,
+            child: _buildCircle(300, const Color(0xFF818CF8).withOpacity(0.03)),
+          ).animate().fadeIn(duration: 1.5.seconds).scale(),
+
+          // ── Main Content ───────────────────────────────────────────────
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // LOGO / ICON
+                    Container(
+                      padding: const EdgeInsets.all(22),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(color: const Color(0xFF4F46E5).withOpacity(0.12), blurRadius: 40, offset: const Offset(0, 15))
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.fingerprint_rounded,
+                        size: 52,
+                        color: Color(0xFF4F46E5),
+                      ),
+                    ).animate()
+                     .fadeIn(duration: 800.ms)
+                     .scale(delay: 200.ms),
+
+                    const SizedBox(height: 32),
+
+                    Text(
+                      'Attendance Nexus',
+                      style: GoogleFonts.inter(
+                        fontSize: 34,
+                        fontWeight: FontWeight.w900,
+                        color: const Color(0xFF0F172A),
+                        letterSpacing: -0.5,
+                      ),
+                    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
+
+                    const SizedBox(height: 8),
+
+                    Text(
+                      'Universal Academic Identity Portal',
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF64748B),
+                        letterSpacing: 1,
+                      ),
+                    ).animate().fadeIn(delay: 600.ms),
+
+                    const SizedBox(height: 54),
+
+                    // CLEAN LIGHT FORM
+                    Container(
+                      padding: const EdgeInsets.all(36),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(36),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                        boxShadow: [
+                          BoxShadow(color: const Color(0xFF1E293B).withOpacity(0.04), blurRadius: 40, offset: const Offset(0, 20))
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _buildInputField(
+                            controller: emailCtrl,
+                            label: 'Email',
+                            icon: Icons.alternate_email_rounded,
+                          ).animate().fadeIn(delay: 800.ms).slideX(begin: -0.1),
+
+                          const SizedBox(height: 24),
+
+                          _buildInputField(
+                            controller: passCtrl,
+                            label: 'Password',
+                            icon: Icons.lock_person_rounded,
+                            isPassword: true,
+                          ).animate().fadeIn(delay: 1.seconds).slideX(begin: 0.1),
+
+                          const SizedBox(height: 24),
+
+                          _buildRoleSelector()
+                              .animate()
+                              .fadeIn(delay: 1.2.seconds),
+
+                          const SizedBox(height: 48),
+
+                          _buildLoginButton(auth)
+                              .animate()
+                              .fadeIn(delay: 1.4.seconds)
+                              .scale(begin: const Offset(0.95, 0.95)),
+                        ],
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 40),
+                    
+                    Text(
+                      'Developed for Modern Learning Institutions © 2026',
+                      style: GoogleFonts.inter(fontSize: 10, color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                    ).animate().fadeIn(delay: 2.seconds),
+                  ],
+                ),
               ),
             ),
           ),
-
-          const SizedBox(height: 6),
-
-          // Subtitle with fade animation
-          _isAnimationInitialized
-              ? FadeTransition(
-                  opacity: CurvedAnimation(
-                    parent: _animationController,
-                    curve: const Interval(0.3, 0.6, curve: Curves.easeIn),
-                  ),
-                  child: const Text(
-                    'Login to continue',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              : const Text(
-                  'Login to continue',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
-                ),
-
-          const SizedBox(height: 32),
-
-          // Email Field with slide animation
-          _isAnimationInitialized
-              ? SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(-0.5, 0),
-                    end: Offset.zero,
-                  ).animate(
-                    CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.2, 0.5, curve: Curves.easeOut),
-                    ),
-                  ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.2, 0.5, curve: Curves.easeIn),
-                    ),
-                    child: _buildEmailField(),
-                  ),
-                )
-              : _buildEmailField(),
-
-          const SizedBox(height: 16),
-
-          // Password Field with slide animation
-          _isAnimationInitialized
-              ? SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0.5, 0),
-                    end: Offset.zero,
-                  ).animate(
-                    CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.3, 0.6, curve: Curves.easeOut),
-                    ),
-                  ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.3, 0.6, curve: Curves.easeIn),
-                    ),
-                    child: _buildPasswordField(),
-                  ),
-                )
-              : _buildPasswordField(),
-
-          const SizedBox(height: 20),
-
-          // Role Dropdown with slide animation
-          _isAnimationInitialized
-              ? SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(-0.5, 0),
-                    end: Offset.zero,
-                  ).animate(
-                    CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.4, 0.7, curve: Curves.easeOut),
-                    ),
-                  ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.4, 0.7, curve: Curves.easeIn),
-                    ),
-                    child: _buildRoleDropdown(),
-                  ),
-                )
-              : _buildRoleDropdown(),
-
-          const SizedBox(height: 30),
-
-          // Login Button with scale animation
-          _isAnimationInitialized
-              ? ScaleTransition(
-                  scale: Tween<double>(begin: 0.8, end: 1.0).animate(
-                    CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.6, 1.0, curve: Curves.elasticOut),
-                    ),
-                  ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _animationController,
-                      curve: const Interval(0.6, 0.9, curve: Curves.easeIn),
-                    ),
-                    child: _buildLoginButton(context, auth),
-                  ),
-                )
-              : _buildLoginButton(context, auth),
         ],
       ),
     );
   }
 
-  Widget _buildEmailField() {
-    return TextField(
-      controller: emailCtrl,
-      decoration: InputDecoration(
-        labelText: 'Email',
-        labelStyle: TextStyle(
-          color: Colors.grey.shade600,
-        ),
-        prefixIcon: Icon(
-          Icons.email_outlined,
-          color: Colors.deepPurple.shade500,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Colors.deepPurple.shade500,
-            width: 2,
-          ),
-        ),
-        filled: true,
-        fillColor: Colors.grey.shade50,
+  Widget _buildCircle(double size, Color color) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
       ),
     );
   }
 
-  Widget _buildPasswordField() {
-    return TextField(
-      controller: passCtrl,
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Password',
-        labelStyle: TextStyle(
-          color: Colors.grey.shade600,
-        ),
-        prefixIcon: Icon(
-          Icons.lock_outline,
-          color: Colors.deepPurple.shade500,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Colors.deepPurple.shade500,
-            width: 2,
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool isPassword = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: const Color(0xFF94A3B8), letterSpacing: 1.5)),
+        const SizedBox(height: 10),
+        TextField(
+          controller: controller,
+          obscureText: isPassword && _obscureText,
+          style: GoogleFonts.inter(color: const Color(0xFF0F172A), fontWeight: FontWeight.w600, fontSize: 15),
+          decoration: InputDecoration(
+            prefixIcon: Icon(icon, color: const Color(0xFF94A3B8), size: 20),
+            suffixIcon: isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                      color: const Color(0xFF94A3B8),
+                      size: 20,
+                    ),
+                    onPressed: () => setState(() => _obscureText = !_obscureText),
+                  )
+                : null,
+            filled: true,
+            fillColor: const Color(0xFFF8FAFC),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Color(0xFF4F46E5), width: 1.5),
+            ),
+            contentPadding: const EdgeInsets.symmetric(vertical: 20),
           ),
-        ),
-        filled: true,
-        fillColor: Colors.grey.shade50,
-      ),
-    );
-  }
-
-  Widget _buildRoleDropdown() {
-    return DropdownButtonFormField<String>(
-      value: role,
-      items: const [
-        DropdownMenuItem(
-          value: 'STUDENT',
-          child: Text('STUDENT'),
-        ),
-        DropdownMenuItem(
-          value: 'STAFF',
-          child: Text('STAFF'),
         ),
       ],
-      onChanged: (value) {
-        setState(() => role = value!);
-      },
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.person_outline,
-          color: Colors.deepPurple.shade500,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Colors.deepPurple.shade500,
-            width: 2,
-          ),
-        ),
-        filled: true,
-        fillColor: Colors.grey.shade50,
+    );
+  }
+
+  Widget _buildRoleSelector() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF1F5F9),
+        borderRadius: BorderRadius.circular(16),
       ),
-      dropdownColor: Colors.white,
-      borderRadius: BorderRadius.circular(12),
-      icon: Icon(
-        Icons.arrow_drop_down,
-        color: Colors.deepPurple.shade500,
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: role,
+          style: GoogleFonts.inter(color: const Color(0xFF334155), fontSize: 14, fontWeight: FontWeight.bold),
+          icon: const Icon(Icons.unfold_more_rounded, color: Color(0xFF94A3B8), size: 20),
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 'STUDENT', child: Text('Student')),
+            DropdownMenuItem(value: 'STAFF', child: Text('Staff')),
+          ],
+          onChanged: (val) => setState(() => role = val!),
+        ),
       ),
     );
   }
 
-  Widget _buildLoginButton(BuildContext context, AuthProvider auth) {
-    return SizedBox(
-      height: 50,
-      child: ElevatedButton(
-        onPressed: auth.isLoading
-            ? null
-            : () async {
-
-                print("🚀 Login button pressed");
-                print("📧 Email: ${emailCtrl.text.trim()}");
-                print("👤 Role: $role");
-
-                final ok = await auth.login(
-                  emailCtrl.text.trim(),
-                  passCtrl.text.trim(),
-                  role,
-                );
-
-                print("✅ Login result from provider: $ok");
-
-                if (!mounted) return;
-
-                if (ok) {
-
-                  print("➡️ Navigating to dashboard");
-
-                  if (role == 'STUDENT') {
-                    Navigator.pushReplacementNamed(context, '/student-dashboard');
-                  } else {
-                    Navigator.pushReplacementNamed(context, '/staff-dashboard');
-                  }
-                } else {
-                  
-                  print("❌ Login failed — showing snackbar");
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    //const SnackBar(content: Text("Login failed")),
-                    SnackBar(content: Text(auth.errorMessage ?? "Login failed")),
-                  );
-                }
-              },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+  Widget _buildLoginButton(AuthProvider auth) {
+    return Container(
+      height: 62,
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A), // Dark Navy
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF0F172A).withOpacity(0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
-          elevation: 4,
-          shadowColor: Colors.deepPurple.withOpacity(0.4),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: auth.isLoading ? null : _handleLogin,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         ),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          transitionBuilder: (child, animation) {
-            return ScaleTransition(
-              scale: animation,
-              child: child,
-            );
-          },
+        child: Center(
           child: auth.isLoading
               ? const SizedBox(
-                  key: ValueKey('loader'),
-                  width: 22,
-                  height: 22,
+                  width: 20,
+                  height: 20,
                   child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                  ),
+                      strokeWidth: 3, color: Colors.white),
                 )
-              : const Text(
+              : Text(
                   'Login',
-                  key: ValueKey('text'),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                  style: GoogleFonts.outfit(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                    letterSpacing: 1.5,
                   ),
                 ),
         ),
       ),
     );
+  }
+
+  Future<void> _handleLogin() async {
+    final auth = context.read<AuthProvider>();
+    final ok = await auth.login(
+      emailCtrl.text.trim(),
+      passCtrl.text.trim(),
+      role,
+    );
+
+    if (!mounted) return;
+
+    if (ok) {
+      Navigator.pushReplacementNamed(
+        context,
+        role == 'STUDENT' ? '/student-dashboard' : '/staff-dashboard',
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(auth.errorMessage ?? "Auth Protocol Failed"),
+          backgroundColor: const Color(0xFFEF4444),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          margin: const EdgeInsets.all(24),
+        ),
+      );
+    }
   }
 }
